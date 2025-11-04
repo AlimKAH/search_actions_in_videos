@@ -1,0 +1,4 @@
+films_dir: ./films
+output_dir: ./output
+cache_dir: ./cache
+
