@@ -35,20 +35,21 @@ uv sync
 
 ### Индексация видео (однократная операция)
 ```bash
-python src/main.py index --films-dir ./films
+python main.py index 
 ```
 
 Обрабатывает все видео, определяет сцены, извлекает кадры и кэширует эмбеддинги CLIP.
 
 ### Поиск похожих фрагментов
 ```bash
-python src/main.py search --query "explosion" --films-dir ./films
+python main.py search query "explosion" 
 ```
 
 ### Поиск по нескольким запросам
 ```bash
-python src/main.py batch_search --queries "explosion,flood,fight" --films-dir ./films
+python main.py batch_search queries=[explosion,flood,fight]
 ```
+Для более подробной информацией о параметрах, обратитесь к [conf/README.md](conf/README.md)
 
 ## Структура выходных данных
 
