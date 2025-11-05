@@ -1,0 +1,9 @@
+similarity_threshold: 0.40
+top_k: 10
+use_negative_filtering: true
+negative_queries:
+  explosion: ["person talking", "static scene", "walking"]
+  flood: ["rain", "drinking water", "swimming pool"]
+  fight: ["dancing", "hugging", "shaking hands"]
+
+

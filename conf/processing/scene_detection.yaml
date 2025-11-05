@@ -1,0 +1,7 @@
+scene_threshold: 27.0
+skip_intro_seconds: 30
+skip_outro_seconds: 300
+use_motion_filter: false
+min_motion_threshold: 3.0
+frame_extraction_fps: 1.0
+

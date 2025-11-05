@@ -1,0 +1,19 @@
+defaults:
+  - model: clip
+  - processing: scene_detection
+  - paths: local
+  - _self_
+
+films_dir: ./films
+output_dir: ./output
+cache_dir: ./cache
+
+device: cuda
+batch_size: 32
+fragment_length: 5
+similarity_threshold: 0.25
+aggregation_method: max
+
+query: null
+queries: []
+
