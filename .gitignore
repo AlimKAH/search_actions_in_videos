@@ -28,7 +28,6 @@ ENV/
 films/
 output/
 cache/
-analysis/
 *.mp4
 *.avi
 *.mkv
