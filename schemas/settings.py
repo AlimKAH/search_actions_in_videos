@@ -6,8 +6,9 @@ from pydantic import BaseModel, Field, field_validator
 class ModelConfig(BaseModel):
     """CLIP model configuration."""
 
-    name: str = Field(default="ViT-B/32", description="CLIP model name")
-    type: str = Field(default="clip", description="Model type")
+    name: str = Field(default="ViT-H-14", description="CLIP model name")
+    type: str = Field(default="open_clip", description="Model type")
+    pretrained: str = Field(default="laion2b_s32b_b79k", description="Pretrained weights")
 
 
 class ProcessingConfig(BaseModel):

@@ -8,10 +8,10 @@ films_dir: ./films
 output_dir: ./output
 cache_dir: ./cache
 
-device: cuda
+device: cpu
 batch_size: 32
 fragment_length: 5
-similarity_threshold: 0.25
+similarity_threshold: 0.19
 aggregation_method: max
 
 query: null

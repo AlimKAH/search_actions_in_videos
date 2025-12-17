@@ -1,3 +1,4 @@
-name: ViT-B/32
-type: clip
+name: ViT-H-14
+type: open_clip
+pretrained: laion2b_s32b_b79k
 

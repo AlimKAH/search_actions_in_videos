@@ -27,21 +27,48 @@ class FragmentExtractor:
         end_formatted = f"{int(end_time):05d}"
         output_filename = f"{video_name}_{start_formatted}_{end_formatted}.mp4"
         output_path = query_dir / output_filename
+        # Hybrid seek: rough input seek + precise trim filter (fast and frame-accurate)
+        seek_offset = max(0, start_time - 10)
+        trim_start = start_time - seek_offset
+        trim_end = end_time - seek_offset
+        input_stream = ffmpeg.input(str(video_path), ss=seek_offset)
+        video = (
+            input_stream.video
+            .filter('trim', start=trim_start, end=trim_end)
+            .filter('setpts', 'PTS-STARTPTS')
+        )
         try:
-            (
-                ffmpeg
-                .input(str(video_path), ss=start_time, t=end_time - start_time)
-                .output(str(output_path), codec='copy', loglevel='error')
-                .overwrite_output()
-                .run()
+            audio = (
+                input_stream.audio
+                .filter('atrim', start=trim_start, end=trim_end)
+                .filter('asetpts', 'PTS-STARTPTS')
             )
-        except ffmpeg.Error as e:
             (
                 ffmpeg
-                .input(str(video_path), ss=start_time, t=end_time - start_time)
-                .output(str(output_path), loglevel='error')
+                .output(
+                    video, audio,
+                    str(output_path),
+                    vcodec='libx264',
+                    acodec='aac',
+                    preset='fast',
+                    crf=23
+                )
                 .overwrite_output()
-                .run()
+                .run(quiet=True)
+            )
+        except ffmpeg.Error:
+            # Fallback for videos without audio
+            (
+                ffmpeg
+                .output(
+                    video,
+                    str(output_path),
+                    vcodec='libx264',
+                    preset='fast',
+                    crf=23
+                )
+                .overwrite_output()
+                .run(quiet=True)
             )
         return output_path
 

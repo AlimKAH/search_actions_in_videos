@@ -29,7 +29,7 @@ class VideoSearchSystem:
             config.processing.use_motion_filter,
             config.processing.min_motion_threshold
         )
-        self.clip_encoder = CLIPEncoder(config.model.name, config.device)
+        self.clip_encoder = CLIPEncoder(config.model.name, config.device, config.model.pretrained)
         self.search_engine = SearchEngine(config.similarity_threshold, config.aggregation_method)
         self.fragment_extractor = FragmentExtractor(config.output_dir)
         self.metadata_manager = MetadataManager(config.output_dir)
